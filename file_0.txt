@@ -1,0 +1,17 @@
+public class Main {
+    public static void main(String[] args) throws IOException {
+        String projectRoot = System.getProperty("user.dir");
+
+        File srcFolder = new File(projectRoot, "src/main/");
+        File classes = new File(projectRoot, "target/classes/");
+
+        JsonObject json = new JsonObject();
+
+        for (File file : srcFolder.listFiles()) {
+            if (!file.getName().startsWith("."))
+                json.put(file.getPath(), IOUtils.toString(file));
+        }
+
+        System.out.println(json);
+    }
+}

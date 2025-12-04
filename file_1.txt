@@ -1,0 +1,19 @@
+public class MainTest {
+
+    @Test
+    public void test_output() throws Exception{
+        ProcessBuilder pb = new ProcessBuilder();
+        pb.directory("/home/michael/Documents"); // <-- this path is important!!!
+        pb.redirectErrorStream(true);
+
+        pb.command("./target/HelloWorld-0.0.1-SNAPSHOT.jar", "HelloWorld.java"); // <--- HelloWorld is a file in src folder, so you need to provide its path relative to project root
+        Process process = pb.start();
+
+
+        InputStream inputStream = process.getInputStream();
+
+        String output = IOUtils.toString(inputStream);
+        assert output != null;
+
+    }
+}
